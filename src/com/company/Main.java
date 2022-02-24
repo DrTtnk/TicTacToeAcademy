@@ -61,42 +61,26 @@ class TicTacToeGame { // Also known as : Tris
         return c0 != CellStatus.EMPTY && c0 == c1 && c1 == c2;
     }
 
-    static private Optional<Player> getWinner(CellStatus c) {
-        return  Optional.empty(); // ToDo - leggi sotto
+    static private Optional<Player> getWinner(CellStatus cell) {
+        return Optional.of(cell == CellStatus.X ? Player.X : Player.O);
     }
 
     public Optional<Player> getTheWinner() {
         // Rows
         var g = this.gameTable;
 
-        if (isWinning(g[0][0], g[0][1], g[0][2])) { // ToDo Finire di sostituire 'isWinning' anche nelle altre condizioni
-            return Optional.of(g[0][0] == CellStatus.X ? Player.X : Player.O); // ToDo Creare il corpo della funzione 'getWinner' e sostituirlo nei return
-        }
-        if (g[1][0] != CellStatus.EMPTY && g[1][0] == g[1][1] && g[1][1] == g[1][2]) {
-            return Optional.of(g[1][0] == CellStatus.X ? Player.X : Player.O);
-        }
-        if (g[2][0] != CellStatus.EMPTY && g[2][0] == g[2][1] && g[2][1] == g[2][2]) {
-            return Optional.of(g[2][0] == CellStatus.X ? Player.X : Player.O);
-        }
+        if (isWinning(g[0][0], g[0][1], g[0][2])) return getWinner(g[0][0]);
+        if (isWinning(g[1][0], g[1][1], g[1][2])) return getWinner(g[1][0]);
+        if (isWinning(g[2][0], g[2][1], g[2][2])) return getWinner(g[2][0]);
 
         // Columns
-        if (g[0][0] != CellStatus.EMPTY && g[0][0] == g[1][0] && g[1][0] == g[2][0]) {
-            return Optional.of(g[0][0] == CellStatus.X ? Player.X : Player.O);
-        }
-        if (g[0][1] != CellStatus.EMPTY && g[0][1] == g[1][1] && g[1][1] == g[2][1]) {
-            return Optional.of(g[0][1] == CellStatus.X ? Player.X : Player.O);
-        }
-        if (g[0][2] != CellStatus.EMPTY && g[0][2] == g[1][2] && g[1][2] == g[2][2]) {
-            return Optional.of(g[0][2] == CellStatus.X ? Player.X : Player.O);
-        }
+        if (isWinning(g[0][0], g[1][0], g[2][0])) return getWinner(g[0][0]);
+        if (isWinning(g[0][1], g[1][1], g[2][1])) return getWinner(g[0][1]);
+        if (isWinning(g[0][2], g[1][2], g[2][2])) return getWinner(g[0][2]);
 
         // Diagonals
-        if (g[0][0] != CellStatus.EMPTY && g[0][0] == g[1][1] && g[1][1] == g[2][2]) {
-            return Optional.of(g[0][0] == CellStatus.X ? Player.X : Player.O);
-        }
-        if (g[0][2] != CellStatus.EMPTY && g[0][2] == g[1][1] && g[1][1] == g[2][0]) {
-            return Optional.of(g[0][2] == CellStatus.X ? Player.X : Player.O);
-        }
+        if (isWinning(g[0][0], g[1][1], g[2][2])) return getWinner(g[0][0]);
+        if (isWinning(g[0][2], g[1][1], g[2][0])) return getWinner(g[0][2]);
 
         return Optional.empty();
     }
