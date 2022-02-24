@@ -50,11 +50,7 @@ class TicTacToeGame { // Also known as : Tris
     }
 
     public void printBoard() {
-        for (var row : gameTable) {
-            for (var cell : row)
-                System.out.print(cell == CellStatus.EMPTY ? "." : cell.toString());
-            System.out.println();
-        }
+        System.out.println(Arrays.deepToString(gameTable).replaceAll("\\[|\\]", ""));
     }
 
     static private boolean isWinning(CellStatus c0, CellStatus c1, CellStatus c2){
