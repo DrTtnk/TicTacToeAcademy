@@ -86,12 +86,7 @@ class TicTacToeGame { // Also known as : Tris
     }
 
     public boolean isDraw(){ // ToDo - Provare a rifare questi cicli nested con degli stream
-        for(var row: gameTable)
-            for (var l: row)
-                if(l == CellStatus.EMPTY)
-                    return false;
-
-        return true;
+        return Arrays.stream(gameTable).flatMap(Arrays::stream).allMatch(c -> c != CellStatus.EMPTY);
     }
 }
 
